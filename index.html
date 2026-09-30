@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Materiais da campanha · Grupo Rojemac</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --bg:#F4F1EC; --surface:#FFFFFF; --ink:#16243D; --muted:#5F6B80; --line:#E3DDD3;
+    --navy:#16243D; --cta:#EA663D; --cta-ink:#FFFFFF; --gold:#EFC797; --chip:#E9EEF5;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E1626; --surface:#17223A; --ink:#E8E6E1; --muted:#9AA4B4; --line:#26324B; --chip:#1F2B44;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Roboto,-apple-system,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+  .topo{background:var(--navy);color:#fff;}
+  .topo .in,main{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px;}
+  .topo .in{padding-top:26px;padding-bottom:24px;}
+  .marca{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+  h1{font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:clamp(22px,4vw,34px);line-height:1.15;margin:8px 0 6px;text-wrap:balance;}
+  .sub{font-size:14px;color:#C9D1DE;}
+  .acoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;align-items:center;}
+  .btn{border:0;border-radius:9px;font:700 14px Roboto,Arial,sans-serif;padding:12px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none;}
+  .btn.pri{background:var(--cta);color:var(--cta-ink);}
+  .btn.sec{background:transparent;color:var(--ink);border:1px solid var(--line);padding:9px 12px;font-size:13px;}
+  .btn:disabled{opacity:.6;cursor:progress;}
+  .status{font-size:13px;color:#C9D1DE;}
+  .links{max-width:1200px;margin:0 auto;padding:18px 24px 0;}
+  .links .cx{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--cta);border-radius:12px;padding:16px 18px;}
+  .links .cap{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cta);}
+  .links .dica{font-size:13px;color:var(--muted);margin:4px 0 12px;}
+  .links .lk{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 0;border-top:1px solid var(--line);}
+  .links .lk:first-of-type{border-top:0;padding-top:0;}
+  .links .rot{font-size:13px;font-weight:700;min-width:120px;}
+  .links input{flex:1;min-width:0;font:500 13px Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 10px;}
+  @media (max-width:560px){.links{padding:14px 16px 0;}.links .rot{min-width:0;width:100%;}.links input{width:100%;flex:none;}.links .lk .btn{flex:1;justify-content:center;}}
+  .previa{background:#FFF1D6;color:#6B4A12;font-size:13px;padding:10px 24px;text-align:center;}
+  .filtros{position:sticky;top:0;z-index:3;background:var(--bg);border-bottom:1px solid var(--line);}
+  .filtros .in{max-width:1200px;margin:0 auto;padding:12px 24px;display:flex;gap:8px;overflow-x:auto;}
+  .filtros button{flex:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;font:600 13px Roboto,Arial,sans-serif;padding:8px 14px;cursor:pointer;}
+  .filtros button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff;}
+  main{padding-top:8px;padding-bottom:64px;}
+  section{margin-top:28px;}
+  h2{font-family:Montserrat,Arial,sans-serif;font-size:18px;margin:0 0 14px;display:flex;align-items:baseline;gap:8px;}
+  h2 small{font-family:Roboto,Arial,sans-serif;font-weight:500;font-size:13px;color:var(--muted);}
+  .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+  .grade.largo{grid-template-columns:1fr;}
+  @media (min-width:760px){.grade.largo{grid-template-columns:repeat(2,1fr);}}
+  .grade>*{min-width:0;}
+  .card{background:var(--surface);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(22,36,61,.06),0 10px 24px -20px rgba(22,36,61,.5);}
+  .card .img{background:var(--chip);display:flex;align-items:center;justify-content:center;cursor:zoom-in;}
+  .card img{display:block;width:100%;height:auto;}
+  .card .info{padding:12px 14px 14px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .card .nome{font-size:13.5px;font-weight:600;line-height:1.35;}
+  .card .fmt{font-size:12px;color:var(--muted);margin-top:2px;}
+  .card .bts{margin-top:auto;display:flex;gap:8px;}
+  .vazio{margin:48px auto;max-width:520px;text-align:center;font-size:15px;color:var(--muted);line-height:1.55;}
+  #lupa{position:fixed;inset:0;z-index:10;background:rgba(8,13,24,.94);display:none;overflow:auto;}
+  #lupa.on{display:flex;}
+  #lupa img{margin:auto;max-width:100%;height:auto;padding:56px 12px;}
+  #lupa button{position:fixed;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:var(--navy);font:600 24px/1 Roboto,Arial,sans-serif;cursor:pointer;}
+  .linha1{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .btn.todas{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.28);padding:8px 14px;font-size:13px;}
+  .btn.todas:hover{background:rgba(255,255,255,.16);}
+  .btn.todas b{background:var(--gold);color:var(--navy);border-radius:999px;font-size:11px;padding:1px 7px;}
+  #todas{position:fixed;inset:0;z-index:9;background:rgba(8,13,24,.55);display:none;justify-content:flex-end;}
+  #todas.on{display:flex;}
+  #todas .pn{background:var(--surface);color:var(--ink);width:min(420px,100%);height:100%;overflow:auto;padding:22px 20px 32px;box-shadow:-12px 0 32px rgba(8,13,24,.25);}
+  #todas .cab{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px;}
+  #todas h2{margin:0;}
+  #todas .x{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 22px/1 Roboto,Arial,sans-serif;cursor:pointer;flex:none;}
+  #todas .dica{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.45;}
+  #todas a.cp{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 14px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;line-height:1.3;}
+  #todas a.cp:hover{border-color:var(--cta);}
+  #todas a.cp small{display:block;font-weight:400;font-size:12px;color:var(--muted);margin-top:3px;}
+  #todas a.cp[aria-current="page"]{border-color:var(--navy);background:var(--chip);}
+  #todas a.cp .aqui{flex:none;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  #todas a.cp .seta{flex:none;color:var(--cta);font-size:18px;}
+  button:focus-visible,#todas a.cp:focus-visible,.btn:focus-visible,.card .img:focus-visible{outline:2px solid var(--cta);outline-offset:2px;}
+  @media (max-width:560px){.topo .in,main,.filtros .in{padding-left:16px;padding-right:16px;}.grade{grid-template-columns:repeat(2,1fr);gap:10px;}.grade.largo{grid-template-columns:1fr;}.card .info{padding:10px;}.card .bts .btn{flex:1;justify-content:center;}}
+</style>
+</head>
+<body>
+<script type="application/json" id="dados"></script>
+<div id="app"></div>
+<div id="lupa" role="dialog" aria-modal="true" aria-label="Arte ampliada"><img id="lupaImg" alt=""><button type="button" id="lupaFechar" aria-label="Fechar">×</button></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+(function(){
+  var app=document.getElementById('app');
+  /* Dentro do Apps Script os dados já vêm na página. Fora dele (página hospedada fora do
+     script.google.com, para escapar do /u/1/ de quem tem várias contas Google) a página pede
+     os dados ao Apps Script: o fetch vai sem cookie, então o Google não troca de conta. */
+  var EXEC='https://script.google.com/macros/s/AKfycbxIWNIKSBMdwA9diHYOxbw7GvPLJCGOjV2v3iR_ZyKFB8ONk0TdwKrUIovy1XdRTeTqgw/exec';
+  var dentro=null;
+  try{ dentro=JSON.parse(document.getElementById('dados').textContent); }catch(e){}
+  if(dentro){ iniciar(dentro); return; }
+  var id=(new URLSearchParams(location.search).get('c')||new URLSearchParams(location.search).get('materiais')||'').replace(/[^a-z0-9]/gi,'');
+  app.innerHTML='<div class="topo"><div class="in"><div class="marca">Grupo Rojemac · Materiais para o comercial</div><h1>Carregando…</h1></div></div>';
+  fetch(EXEC+'?formato=json&materiais='+encodeURIComponent(id||'-'))
+    .then(function(r){ return r.json(); })
+    .then(function(d){ d.base=location.origin+location.pathname+'?c='; iniciar(d); })
+    .catch(function(){ iniciar({erro:'Não consegui carregar os materiais agora. Atualize a página em alguns segundos.'}); });
+
+  function iniciar(D){
+  D=D||{};
+  if(D.campanha){ document.title='Materiais · '+D.campanha; }
+  var ORDEM=['Banners','Feed e WhatsApp','Stories e verticais','Horizontais','Outros formatos'];
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function slug(s){return String(s||'arte').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'arte';}
+  function url(id,w){return 'https://lh3.googleusercontent.com/d/'+id+'=w'+w;}
+
+  /* "Todas as campanhas": as já publicadas para o comercial, para ir de uma à outra */
+  var todas=D.todas||[];
+  function data(iso){ var d=new Date(iso); return isNaN(d)?'':('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+d.getFullYear(); }
+  var btnTodas=todas.length?'<button type="button" class="btn todas" id="btnTodas" aria-haspopup="dialog" aria-controls="todas">'+
+    '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>'+
+    'Todas as campanhas <b>'+todas.length+'</b></button>':'';
+  if(todas.length){
+    var pn=document.createElement('div');
+    pn.id='todas'; pn.setAttribute('role','dialog'); pn.setAttribute('aria-modal','true'); pn.setAttribute('aria-labelledby','todasTit');
+    pn.innerHTML='<div class="pn"><div class="cab"><h2 id="todasTit">Campanhas publicadas</h2>'+
+      '<button type="button" class="x" id="todasFechar" aria-label="Fechar">×</button></div>'+
+      '<p class="dica">Todas as campanhas que o marketing já publicou para o comercial. Toque numa para ver os materiais dela.</p>'+
+      todas.map(function(c){
+        var aqui=c.id===D.id;
+        return '<a class="cp" href="'+esc(D.base+c.id)+'"'+(aqui?' aria-current="page"':'')+'><span>'+esc(c.nome)+
+          (c.em?'<small>publicada em '+data(c.em)+'</small>':'')+'</span>'+
+          (aqui?'<span class="aqui">Você está aqui</span>':'<span class="seta" aria-hidden="true">→</span>')+'</a>';
+      }).join('')+'</div>';
+    document.body.appendChild(pn);
+    var abreTodas=function(){ pn.classList.add('on'); document.getElementById('todasFechar').focus(); };
+    var fechaTodas=function(){ if(!pn.classList.contains('on')){return;} pn.classList.remove('on'); var b=document.getElementById('btnTodas'); if(b){b.focus();} };
+    pn.addEventListener('click',function(e){ if(e.target===pn||e.target.closest('#todasFechar')){ fechaTodas(); } });
+    document.addEventListener('click',function(e){ if(e.target.closest('#btnTodas')){ abreTodas(); } });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ fechaTodas(); } });
+  }
+
+  var topo='<div class="topo"><div class="in"><div class="linha1"><div class="marca">Grupo Rojemac · Materiais para o comercial</div>'+btnTodas+'</div>';
+  if(D.erro){
+    app.innerHTML=topo+'<h1>Materiais da campanha</h1></div></div><main><p class="vazio">'+esc(D.erro)+
+      (todas.length?' Use “Todas as campanhas” lá em cima para escolher outra.':'')+'</p></main>';
+    return;
+  }
+  var artes=D.artes||[];
+  artes.forEach(function(a,i){ a.peca=String(a.peca||'').replace(/^\s*entrega de arte\s*[-–:]?\s*/i,'')||'Arte'; a.n=i; a.arquivo=slug(a.peca)+'-'+String(i+1).padStart(2,'0'); });
+  var grupos=ORDEM.filter(function(g){return artes.some(function(a){return a.grupo===g;});});
+
+  var html=topo+'<h1>'+esc(D.campanha)+'</h1>'+
+    '<div class="sub">'+artes.length+(artes.length===1?' arte aprovada':' artes aprovadas')+' para usar com o cliente · atualizado em '+esc(D.atualizado)+'</div>'+
+    (artes.length?'<div class="acoes"><button type="button" class="btn pri" id="btnTudo">'+
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M6 13l6 6 6-6"/><path d="M4 20h16"/></svg>'+
+      '<span>Baixar tudo (.zip)</span></button><span class="status" id="status" aria-live="polite"></span></div>':'')+
+    '</div></div>';
+  var paginas=D.paginas||[];
+  if(paginas.length){
+    html+='<div class="links"><div class="cx"><div class="cap">Link da campanha para o cliente</div>'+
+      '<div class="dica">Mande sempre este link: é por ele que medimos as vendas que vieram do comercial.</div>'+
+      paginas.map(function(p,i){
+        return '<div class="lk">'+(p.rotulo?'<span class="rot">'+esc(p.rotulo)+'</span>':'')+
+          '<input type="text" readonly value="'+esc(p.url)+'" aria-label="Link da campanha'+(p.rotulo?' — '+esc(p.rotulo):'')+'" id="lk'+i+'">'+
+          '<button type="button" class="btn pri" data-copiar="'+i+'">Copiar link</button>'+
+          '<a class="btn sec" href="'+esc(p.url)+'" target="_blank" rel="noopener">Abrir</a></div>';
+      }).join('')+'</div></div>';
+  }
+  if(D.previa){ html+='<div class="previa">Prévia: o comercial só enxerga esta página depois da tag “publicar para o comercial” na campanha.</div>'; }
+  if(grupos.length>1){
+    html+='<div class="filtros"><div class="in"><button type="button" data-g="" aria-pressed="true">Tudo · '+artes.length+'</button>'+
+      grupos.map(function(g){
+        var n=artes.filter(function(a){return a.grupo===g;}).length;
+        return '<button type="button" data-g="'+esc(g)+'" aria-pressed="false">'+esc(g)+' · '+n+'</button>';
+      }).join('')+'</div></div>';
+  }
+  html+='<main>';
+  if(!artes.length){
+    html+='<p class="vazio">Ainda não há arte aprovada desta campanha. Assim que o marketing aprovar, ela aparece aqui sozinha.</p>';
+  }
+  grupos.forEach(function(g){
+    var lista=artes.filter(function(a){return a.grupo===g;});
+    html+='<section data-grupo="'+esc(g)+'"><h2>'+esc(g)+' <small>'+lista.length+'</small></h2>'+
+      '<div class="grade'+(g==='Banners'?' largo':'')+'">'+lista.map(function(a){
+        return '<article class="card"><div class="img" tabindex="0" role="button" aria-label="Ampliar" data-lupa="'+a.n+'">'+
+          '<img loading="lazy" src="'+url(a.id,g==='Banners'?1200:700)+'" alt="'+esc(a.peca)+'"'+(a.w?' width="'+a.w+'" height="'+a.h+'"':'')+'></div>'+
+          '<div class="info"><div><div class="nome">'+esc(a.peca)+'</div>'+
+          (a.orig&&a.w?'<div class="fmt">'+a.w+' × '+a.h+' px</div>':'')+'</div>'+
+          '<div class="bts"><button type="button" class="btn sec" data-baixar="'+a.n+'">Baixar</button>'+
+          '<a class="btn sec" href="'+url(a.id,1600)+'" target="_blank" rel="noopener">Abrir</a></div></div></article>';
+      }).join('')+'</div></section>';
+  });
+  html+='</main>';
+  app.innerHTML=html;
+
+  var status=document.getElementById('status');
+  function diz(t){ if(status){ status.textContent=t||''; } }
+  function ext(tipo){ return /png/.test(tipo)?'.png':/webp/.test(tipo)?'.webp':'.jpg'; }
+  function pega(a){
+    return fetch(url(a.id,1600)).then(function(r){ if(!r.ok){throw new Error(r.status);} return r.blob(); });
+  }
+  function salva(blob,nome){
+    var u=URL.createObjectURL(blob), l=document.createElement('a');
+    l.href=u; l.download=nome; document.body.appendChild(l); l.click(); l.remove();
+    setTimeout(function(){URL.revokeObjectURL(u);},4000);
+  }
+
+  document.addEventListener('click',function(e){
+    var f=e.target.closest('.filtros button');
+    if(f){
+      Array.prototype.forEach.call(document.querySelectorAll('.filtros button'),function(b){b.setAttribute('aria-pressed',b===f?'true':'false');});
+      Array.prototype.forEach.call(document.querySelectorAll('section[data-grupo]'),function(s){s.hidden=!!f.dataset.g&&s.dataset.grupo!==f.dataset.g;});
+      return;
+    }
+    var b=e.target.closest('[data-baixar]');
+    if(b){
+      var a=artes[+b.dataset.baixar];
+      b.disabled=true; b.textContent='Baixando…';
+      pega(a).then(function(bl){ salva(bl,a.arquivo+ext(bl.type)); })
+        .catch(function(){ window.open(url(a.id,1600),'_blank'); })
+        .then(function(){ b.disabled=false; b.textContent='Baixar'; });
+      return;
+    }
+    var cp=e.target.closest('[data-copiar]');
+    if(cp){ copiar(cp); return; }
+    var l=e.target.closest('[data-lupa]');
+    if(l){ abreLupa(artes[+l.dataset.lupa]); return; }
+    if(e.target.closest('#btnTudo')){ baixaTudo(e.target.closest('#btnTudo')); }
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){ fechaLupa(); return; }
+    var l=e.target.closest&&e.target.closest('[data-lupa]');
+    if(l&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); abreLupa(artes[+l.dataset.lupa]); }
+  });
+
+  /* a página roda num iframe do Google: se a área de transferência for barrada, seleciona o link */
+  function copiar(bt){
+    var campo=document.getElementById('lk'+bt.dataset.copiar), txt=campo.value;
+    function ok(){ bt.textContent='Copiado!'; setTimeout(function(){bt.textContent='Copiar link';},1800); }
+    function velho(){
+      campo.focus(); campo.select(); campo.setSelectionRange(0,txt.length);
+      var foi=false; try{ foi=document.execCommand('copy'); }catch(e){}
+      if(foi){ ok(); }else{ bt.textContent='Selecionado: Ctrl+C'; }
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(ok,velho); }else{ velho(); }
+  }
+
+  var lupa=document.getElementById('lupa'), lupaImg=document.getElementById('lupaImg');
+  function abreLupa(a){ lupaImg.src=url(a.id,1600); lupaImg.alt=a.peca; lupa.classList.add('on'); document.getElementById('lupaFechar').focus(); }
+  function fechaLupa(){ lupa.classList.remove('on'); lupaImg.removeAttribute('src'); }
+  lupa.addEventListener('click',function(e){ if(e.target!==lupaImg){ fechaLupa(); } });
+
+  function baixaTudo(btn){
+    if(!window.JSZip){ diz('Não consegui preparar o .zip aqui. Use “Baixar” em cada arte.'); return; }
+    btn.disabled=true;
+    var zip=new JSZip(), feitas=0, falhas=0;
+    var pasta=slug(D.campanha);
+    diz('Preparando 0 de '+artes.length+'…');
+    Promise.all(artes.map(function(a){
+      return pega(a).then(function(bl){
+        zip.folder(a.grupo).file(a.arquivo+ext(bl.type),bl);
+      }).catch(function(){ falhas++; }).then(function(){ feitas++; diz('Preparando '+feitas+' de '+artes.length+'…'); });
+    })).then(function(){
+      return zip.generateAsync({type:'blob'});
+    }).then(function(bl){
+      salva(bl,'materiais-'+pasta+'.zip');
+      diz(falhas?('Pronto, mas '+falhas+' arte(s) não vieram. Baixe essas uma a uma.'):'Pronto: o .zip foi baixado.');
+    }).catch(function(){
+      diz('O .zip não saiu. Use “Baixar” em cada arte.');
+    }).then(function(){ btn.disabled=false; });
+  }
+  }
+})();
+</script>
+</body>
+</html>
