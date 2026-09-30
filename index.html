@@ -103,10 +103,17 @@
   if(dentro){ iniciar(dentro); return; }
   var id=(new URLSearchParams(location.search).get('c')||new URLSearchParams(location.search).get('materiais')||'').replace(/[^a-z0-9]/gi,'');
   app.innerHTML='<div class="topo"><div class="in"><div class="marca">Grupo Rojemac · Materiais para o comercial</div><h1>Carregando…</h1></div></div>';
-  fetch(EXEC+'?formato=json&materiais='+encodeURIComponent(id||'-'))
-    .then(function(r){ return r.json(); })
-    .then(function(d){ d.base=location.origin+location.pathname+'?c='; iniciar(d); })
-    .catch(function(){ iniciar({erro:'Não consegui carregar os materiais agora. Atualize a página em alguns segundos.'}); });
+  // o Apps Script parado há um tempo às vezes falha na primeira chamada: tenta até 3 vezes
+  function pede(tentativa){
+    fetch(EXEC+'?formato=json&materiais='+encodeURIComponent(id||'-'))
+      .then(function(r){ return r.json(); })
+      .then(function(d){ d.base=location.origin+location.pathname+'?c='; iniciar(d); })
+      .catch(function(){
+        if(tentativa<3){ setTimeout(function(){ pede(tentativa+1); },1500*tentativa); return; }
+        iniciar({erro:'Não consegui carregar os materiais agora. Atualize a página em alguns segundos.'});
+      });
+  }
+  pede(1);
 
   function iniciar(D){
   D=D||{};
