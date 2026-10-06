@@ -80,13 +80,14 @@
     D=D||{};
     var cards=D.cards||[], filtro='', utm='utm_source=sfmc&utm_medium=email&utm_campaign='+encodeURIComponent(slug(D.campanha||D.titulo||'email'))+'&utm_content=vitrine-busca';
     if(D.titulo){ document.title=D.titulo+' · Grupo Rojemac'; }
-    cards.forEach(function(c){ c.chave=norm(c.nome+' '+(c.vitrine||'')); });
+    /* (06/10) o lojista não vê o código interno: "5170-Taça…" vira "Taça…" */
+    cards.forEach(function(c){ c.nome=String(c.nome||'').replace(/^\s*\d{3,7}\s*[-–_]\s*/,''); c.chave=norm(c.nome+' '+(c.vitrine||'')); });
     var vits=[]; cards.forEach(function(c){ if(c.vitrine&&vits.indexOf(c.vitrine)<0){ vits.push(c.vitrine); } });
     function comUtm(u){ if(!u){ return ''; } if(/[?&]utm_/.test(u)){ return u; } return u+(u.indexOf('?')<0?'?':'&')+utm; }
     function urlSite(q){ return SITE+'?type=product&q='+encodeURIComponent(q||'')+'&'+utm; }
     app.innerHTML='<div class="topo"><div class="in"><div class="marca">Grupo Rojemac · Vitrine do e-mail</div>'+
-      '<h1>'+esc(D.erro?'Vitrine indisponível':(D.titulo||'Produtos do e-mail'))+'</h1>'+
-      '<div class="sub">'+esc(D.erro||('Os produtos deste e-mail'+(D.campanha?' da campanha '+D.campanha:'')+'. Busque pelo nome ou toque em uma vitrine.'))+'</div>'+
+      '<h1>'+esc(D.erro?'Vitrine indisponível':(D.campanha||D.titulo||'Produtos do e-mail'))+'</h1>'+
+      '<div class="sub">'+esc(D.erro||'Os produtos que estão neste e-mail. Busque pelo nome ou toque em uma vitrine.')+'</div>'+
       '<form class="busca" id="f" role="search"><input type="search" id="q" placeholder="O que a sua loja procura hoje?" aria-label="Buscar nos produtos do e-mail" value="'+esc(Q)+'"><button type="submit">Buscar</button></form></div></div>'+
       (vits.length>1?'<div class="filtros"><div class="in" id="vits"><button type="button" data-v="" aria-pressed="true">Todos</button>'+
         vits.map(function(v){ return '<button type="button" data-v="'+esc(v)+'" aria-pressed="false">'+esc(v)+'</button>'; }).join('')+'</div></div>':'')+
@@ -121,6 +122,8 @@
     if(vb){ vb.addEventListener('click',function(e){ var b=e.target.closest('[data-v]'); if(!b){ return; } filtro=b.dataset.v;
       vb.querySelectorAll('[data-v]').forEach(function(x){ x.setAttribute('aria-pressed',String(x===b)); }); pinta(); }); }
     pinta();
+    /* chegou pela barra-link, sem termo: o cursor já vai para a busca (depois de os produtos carregarem) */
+    if(!D.erro&&!inp.value){ try{ inp.focus(); }catch(e){} }
   }
 })();
 </script>
