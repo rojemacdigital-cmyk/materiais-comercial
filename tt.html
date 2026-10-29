@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Conectando TikTok Ads</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="font-family:Arial,sans-serif;background:#16243D;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0">
+<p>Conectando o TikTok Ads à esteira…</p>
+<script>
+/* (29/10) Retorno da autorização do TikTok Ads (API de Marketing). O campo "Advertiser redirect URL" do TikTok aceita
+   só 100 caracteres e a /exec da esteira tem 114, então o TikTok volta aqui e esta página repassa tudo para a esteira. */
+location.replace('https://script.google.com/macros/s/AKfycbxIWNIKSBMdwA9diHYOxbw7GvPLJCGOjV2v3iR_ZyKFB8ONk0TdwKrUIovy1XdRTeTqgw/exec' + (location.search || '?') + '&ttads=1');
+</script>
+</body></html>
